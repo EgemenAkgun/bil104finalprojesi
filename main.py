@@ -69,3 +69,30 @@ df.fillna(0, inplace=True)
 gruplanan_df = df.groupby("Nesne Türü").agg({"Tecrübe": "mean", "Yeni Maaş": "mean"})
 print(gruplanan_df)
 
+# Maaşı 15000 TL üzerinde olanların sayısının bulunması
+maas_ust_limit = 15000
+ust_limit_sayisi = len(df[df["Maaş"] > maas_ust_limit])
+print("Maaşı 15000 TL üzerinde olanların sayısı:", ust_limit_sayisi)
+
+# Yeni maaşa göre DataFrame'in küçükten büyüğe sıralanması
+siralanan_df = df.sort_values(by="Yeni Maaş")
+print("Sıralanan DataFrame:")
+print(siralanan_df)
+
+# Tecrübesi 3 seneden fazla olan Beyaz yakalıların bulunması
+tecrube_limit = 3
+beyaz_yaka_tecrubeli = df[(df["Nesne Türü"] == "Beyaz Yaka") & (df["Tecrübe"] > tecrube_limit)]
+print("Tecrübesi 3 seneden fazla olan Beyaz yakalılar:")
+print(beyaz_yaka_tecrubeli)
+
+# Yeni maaşı 10000 TL üzerinde olanlar için 2-5 satır arası olanları tc_no ve yeni_maaş sütunlarını seçerek gösterme
+yeni_maas_limit = 10000
+yeni_maas_ust_limit = 10000
+filtrelenen_df = df[(df["Yeni Maaş"] > yeni_maas_ust_limit)].iloc[2:5, [1, 10]]
+print("Yeni maaşı 10000 TL üzerinde olanların TC No ve Yeni Maaş sütunları:")
+print(filtrelenen_df)
+
+# Yeni bir DataFrame oluşturarak ad, soyad, sektör ve yeni maaşı içeren sütunları ekleyin
+yeni_df = df[["Ad", "Soyad", "Sektor", "Yeni Maaş"]]
+print("Yeni DataFrame:")
+print(yeni_df)
