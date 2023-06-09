@@ -44,3 +44,28 @@ print(beyaz_yaka2)
 print(beyaz_yaka3)
 
 # Çalışan, mavi yaka ve beyaz yaka nesnelerinden bir DataFrame oluşturulması
+data = {
+    "Nesne Türü": ["Çalışan", "Çalışan", "Çalışan", "Mavi Yaka", "Mavi Yaka", "Mavi Yaka", "Beyaz Yaka", "Beyaz Yaka", "Beyaz Yaka"],
+    "TC No": ["44444444444", "55555555555", "66666666666", "77777777777", "88888888888", "99999999999", "10101010101", "12121212121", "13131313131"],
+    "Ad": ["Ahmet", "Mehmet", "Ayşe", "Ahmet", "Mehmet", "Ayşe", "Ahmet", "Mehmet", "Ayşe"],
+    "Soyad": ["Kaya", "Yılmaz", "Kara", "Demir", "Yılmaz", "Yıldız", "Kaya", "Yılmaz", "Kara"],
+    "Yaş": [30, 35, 28, 32, 37, 29, 30, 35, 28],
+    "Cinsiyet": ["Erkek", "Erkek", "Kadın", "Erkek", "Erkek", "Kadın", "Erkek", "Erkek", "Kadın"],
+    "Uyruk": ["Türk", "Türk", "Türk", "Türk", "Türk", "Türk", "Türk", "Türk", "Türk"],
+    "Sektor": ["Teknoloji", "Muhasebe", "İnşaat","İnşaat","Muhasebe,Teknoloji","Teknoloji","Muhasebe","İnşaat"],
+    "Tecrübe": [3, 5, 2, "", "", "", "", "", ""],
+    "Maaş": [12000, 18000, 10000,14000,20000 ,10000 ,"" ," "," "],
+    "Yıpranma Payı": ["", "", "", 0.2, 0.5, 0.3, "", "", ""],
+    "Teşvik Prim": ["", "", "", "", "", "", 500, 2500, 1000],
+    "Yeni Maaş": ["", "", "", "", "", "", "", "", ""]
+}
+
+df = pd.DataFrame(data)
+
+# Değişken değerleri için 0 atanması
+df.fillna(0, inplace=True)
+
+# Çalışanları kendi içinde gruplandırma ve ortalamaların hesaplanması
+gruplanan_df = df.groupby("Nesne Türü").agg({"Tecrübe": "mean", "Yeni Maaş": "mean"})
+print(gruplanan_df)
+
